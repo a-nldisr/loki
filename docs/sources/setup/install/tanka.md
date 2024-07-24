@@ -63,7 +63,7 @@ loki + promtail + gateway {
     htpasswd_contents: 'loki:$apr1$H4yGiGNg$ssl5/NymaGFRUvxIV1Nyr.',
 
     // S3 variables -- Remove if not using s3
-    storage_backend: 's3,dynamodb',
+    storage_backend: 's3',
     s3_access_key: 'key',
     s3_secret_access_key: 'secret access key',
     s3_address: 'url',
@@ -71,7 +71,7 @@ loki + promtail + gateway {
     dynamodb_region: 'region',
 
     // GCS variables -- Remove if not using gcs
-    storage_backend: 'bigtable,gcs',
+    storage_backend: 'gcs',
     bigtable_instance: 'instance',
     bigtable_project: 'project',
     gcs_bucket_name: 'bucket',
@@ -81,7 +81,7 @@ loki + promtail + gateway {
       schema_config: {
         configs: [{
           from: 'YYYY-MM-DD',
-          store: 'boltdb-shipper',
+          store: 'tsdb-shipper',
           object_store: 'my-object-storage-backend-type',
           schema: 'v11',
           index: {
@@ -99,8 +99,8 @@ loki + promtail + gateway {
         hostname:: 'gateway.%(namespace)s.svc' % $._config,
         username:: 'loki',
         password:: 'password',
-        container_root_path:: '/var/lib/docker',
       }],
+        container_root_path:: '/var/lib/docker',
     },
 
     replication_factor: 3,
